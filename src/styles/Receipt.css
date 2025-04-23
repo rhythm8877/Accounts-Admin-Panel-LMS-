@@ -1,0 +1,100 @@
+/* This CSS file is primarily for receipt preview if needed in the future */
+.receipt-preview-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.receipt-header {
+  text-align: center;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #4a6fdc;
+  margin-bottom: 20px;
+}
+
+.receipt-title {
+  font-size: 24px;
+  color: #4a6fdc;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.receipt-subtitle {
+  font-size: 14px;
+  color: #555;
+}
+
+.receipt-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.receipt-number, .receipt-date {
+  font-size: 14px;
+  color: #666;
+}
+
+.receipt-section {
+  margin-bottom: 20px;
+}
+
+.receipt-section-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #eee;
+}
+
+.receipt-detail-row {
+  display: flex;
+  margin-bottom: 8px;
+}
+
+.receipt-detail-label {
+  width: 150px;
+  font-weight: 500;
+  color: #555;
+}
+
+.receipt-detail-value {
+  flex: 1;
+  color: #333;
+}
+
+.receipt-amount {
+  font-size: 18px;
+  font-weight: 600;
+  color: #4a6fdc;
+  text-align: right;
+  margin: 20px 0;
+}
+
+.receipt-footer {
+  margin-top: 30px;
+  text-align: center;
+  font-size: 12px;
+  color: #777;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+}
+
+.receipt-thank-you {
+  font-size: 14px;
+  font-weight: 500;
+  color: #4a6fdc;
+  text-align: center;
+  margin-top: 10px;
+}
+
+@media print {
+  .receipt-preview-container {
+    box-shadow: none;
+    padding: 0;
+  }
+} 

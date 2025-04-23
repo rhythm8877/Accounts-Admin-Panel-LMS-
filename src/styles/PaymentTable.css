@@ -1,0 +1,235 @@
+/* Modal Overlay */
+.payment-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Modal Container */
+.payment-modal {
+  background-color: white;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 900px;
+  max-height: 90vh;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Modal Header */
+.payment-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background-color: #4a6fdc;
+  color: white;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.payment-modal-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.payment-close-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.8rem;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.payment-close-btn:hover {
+  color: #f0f0f0;
+}
+
+/* Table Container */
+.payment-table-container {
+  padding: 20px;
+  overflow-y: auto;
+  flex-grow: 1;
+}
+
+/* Payment Table */
+.payment-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #e6e6e6;
+}
+
+.payment-table th,
+.payment-table td {
+  padding: 12px 15px;
+  text-align: center;
+  border: 1px solid #e6e6e6;
+}
+
+.payment-table th {
+  background-color: #e8eeff;
+  font-weight: 600;
+  color: #333;
+  white-space: nowrap;
+}
+
+.payment-table tr:nth-child(even) {
+  background-color: #f8f9fa;
+}
+
+.payment-table tr:hover {
+  background-color: #f0f4ff;
+}
+
+/* Amount Input */
+.payment-amount-cell {
+  position: relative;
+}
+
+.payment-amount-input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.payment-rs-prefix {
+  position: absolute;
+  left: 10px;
+  color: #555;
+  z-index: 1;
+}
+
+.payment-amount-input {
+  width: 100%;
+  padding: 8px 10px 8px 40px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: border-color 0.2s;
+}
+
+.payment-amount-input:focus {
+  outline: none;
+  border-color: #4a6fdc;
+  box-shadow: 0 0 0 2px rgba(74, 111, 220, 0.2);
+}
+
+/* Status Toggle Button */
+.payment-status-toggle {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  width: 80px;
+}
+
+.payment-status-toggle.due {
+  background-color: #ffebee;
+  color: #d32f2f;
+}
+
+.payment-status-toggle.paid {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  cursor: not-allowed;
+}
+
+/* Receipt Button */
+.payment-receipt-btn {
+  background-color: #4a6fdc;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  font-size: 14px;
+}
+
+.payment-receipt-btn:hover:not(:disabled) {
+  background-color: #3a5fc6;
+}
+
+.payment-receipt-btn:disabled {
+  background-color: #b0bec5;
+  cursor: not-allowed;
+}
+
+/* Receipt Generated State */
+.payment-row-locked {
+  background-color: #f0f7ff !important;
+}
+
+.payment-input-locked {
+  background-color: #f7f7f7;
+  border: none !important;
+  color: #555;
+  cursor: not-allowed;
+  font-weight: 500;
+  box-shadow: none !important;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.payment-input-locked:focus {
+  outline: none;
+  border: none;
+  box-shadow: none;
+}
+
+.receipt-generated {
+  background-color: #4caf50;
+}
+
+.receipt-generated:disabled {
+  background-color: #4caf50;
+  opacity: 0.8;
+  cursor: not-allowed;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .payment-modal {
+    width: 95%;
+  }
+  
+  .payment-table th,
+  .payment-table td {
+    padding: 8px 10px;
+    font-size: 14px;
+  }
+  
+  .payment-modal-header h2 {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .payment-table {
+    font-size: 12px;
+  }
+  
+  .payment-table th,
+  .payment-table td {
+    padding: 6px 8px;
+  }
+  
+  .payment-receipt-btn,
+  .payment-status-toggle {
+    font-size: 12px;
+    padding: 4px 8px;
+  }
+} 

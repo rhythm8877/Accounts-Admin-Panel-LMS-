@@ -1,0 +1,31 @@
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  min-height: 100vh;
+  background-color: var(--main-bg);
+}
+
+.main-content {
+  padding: 2rem;
+  overflow-y: auto;
+  background-color: var(--main-bg);
+}
+
+@media (max-width: 768px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    margin: 0 auto 1rem;
+    margin-left: 0;
+  }
+
+  .logo {
+    font-size: 1.5rem;
+  }
+}
