@@ -32,7 +32,7 @@ const Sidebar = ({ activeSection, setActiveSection }) => {
       <div className="logo-container">
         {/* <img src="/logo.svg" alt="Kohima Science College" className="logo" /> */}
         <div className="logo-text">
-          <span className="college-name">School</span>
+          <span className="college-name">Accounts</span>
           <span className="college-type">Admin Panel</span>
         </div>
       </div>

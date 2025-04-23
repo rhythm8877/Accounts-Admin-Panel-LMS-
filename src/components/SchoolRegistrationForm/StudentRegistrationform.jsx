@@ -7,7 +7,7 @@ import "../../styles/StudentRegistrationForm.css"
 import SuccessAnimation from "./SuccessAnimation"
 
 function StudentRegistrationForm() {
-  const [formData, setFormData] = useState({
+  const initialFormData = {
     studentName: "",
     dob: "",
     grade: "",
@@ -20,7 +20,9 @@ function StudentRegistrationForm() {
     religion: "",
     tribe: "",
     category: "",
-  })
+  }
+
+  const [formData, setFormData] = useState(initialFormData)
 
   const [errors, setErrors] = useState({})
   const [isSubmitted, setIsSubmitted] = useState(false)
@@ -62,6 +64,20 @@ function StudentRegistrationForm() {
       }
     }
   }, [formData.address])
+
+  // Reset form after 4 seconds of showing success animation
+  useEffect(() => {
+    let resetTimer;
+    if (isSubmitted) {
+      resetTimer = setTimeout(() => {
+        setIsSubmitted(false);
+        setFormData(initialFormData);
+      }, 4000); // 4 seconds
+    }
+    return () => {
+      if (resetTimer) clearTimeout(resetTimer);
+    };
+  }, [isSubmitted]);
 
   const handleChange = (e) => {
     const { name, value } = e.target
