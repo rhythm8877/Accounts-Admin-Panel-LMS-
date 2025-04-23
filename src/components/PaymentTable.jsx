@@ -41,7 +41,9 @@ const PaymentTable = ({ isOpen, onClose, studentId, studentName, studentGrade, s
   const handleStatusToggle = (id) => {
     // Check if receipt has been generated for this payment
     const payment = paymentData.find(item => item.id === id);
-    if (payment.receiptGenerated) return;
+    
+    // Don't proceed if receipt is generated or no amount is entered
+    if (payment.receiptGenerated || !payment.amount) return;
 
     setPaymentData(paymentData.map(item => 
       item.id === id && item.status === 'Due'
@@ -139,7 +141,7 @@ const PaymentTable = ({ isOpen, onClose, studentId, studentName, studentGrade, s
                     <button
                       className={`payment-status-toggle ${payment.status.toLowerCase()}`}
                       onClick={() => handleStatusToggle(payment.id)}
-                      disabled={payment.status === 'Paid' || payment.receiptGenerated}
+                      disabled={payment.status === 'Paid' || payment.receiptGenerated || !payment.amount}
                     >
                       {payment.status}
                     </button>

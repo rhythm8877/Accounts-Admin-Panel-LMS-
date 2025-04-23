@@ -1,0 +1,275 @@
+.id-card-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  max-width: 100%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.id-card-wrapper {
+  margin-bottom: 20px;
+  padding: 10px;
+}
+
+.id-card {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.id-card-front, .id-card-back {
+  width: 320px;
+  height: 500px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* Front Side Styling */
+.id-card-header {
+  background-color: #1a5276;
+  color: white;
+  padding: 15px;
+  text-align: center;
+}
+
+.id-card-header h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.id-card-session {
+  margin: 5px 0 0;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.id-card-body {
+  flex: 1;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.id-card-photo {
+  width: 120px;
+  height: 150px;
+  border: 2px solid #1a5276;
+  margin: 0 auto 15px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5f5f5;
+}
+
+.student-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.photo-placeholder {
+  color: #999;
+  font-size: 14px;
+  text-align: center;
+}
+
+.id-card-details {
+  flex: 1;
+}
+
+.detail-row {
+  margin-bottom: 8px;
+  display: flex;
+}
+
+.detail-label {
+  width: 80px;
+  font-weight: 600;
+  color: #1a5276;
+  font-size: 14px;
+}
+
+.detail-value {
+  flex: 1;
+  font-size: 14px;
+  color: #333;
+}
+
+.address-value {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.id-card-footer {
+  padding: 15px;
+  border-top: 1px solid #e0e0e0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.id-card-validity {
+  font-size: 12px;
+}
+
+.validity-label {
+  font-weight: 600;
+  color: #1a5276;
+  margin-bottom: 3px;
+}
+
+.id-card-signature {
+  text-align: center;
+  width: 120px;
+}
+
+.signature-line {
+  width: 100%;
+  height: 1px;
+  background-color: #333;
+  margin-bottom: 5px;
+}
+
+.signature-text {
+  font-size: 10px;
+  color: #555;
+}
+
+/* Back Side Styling */
+.back-instructions {
+  margin-bottom: 20px;
+}
+
+.back-instructions h3 {
+  font-size: 16px;
+  color: #1a5276;
+  margin: 0 0 10px;
+}
+
+.back-instructions ol {
+  margin: 0;
+  padding-left: 20px;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.back-instructions li {
+  margin-bottom: 5px;
+}
+
+.emergency-contact {
+  padding: 10px;
+  background-color: #f8f9fa;
+  border-radius: 5px;
+  margin-top: auto;
+}
+
+.emergency-contact h3 {
+  font-size: 14px;
+  color: #1a5276;
+  margin: 0 0 8px;
+}
+
+.emergency-contact p {
+  margin: 5px 0;
+  font-size: 12px;
+}
+
+.disclaimer {
+  font-size: 10px;
+  color: #777;
+  font-style: italic;
+  text-align: center;
+  margin: 0;
+}
+
+/* Action Buttons */
+.id-card-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.back-button, .print-button, .download-button {
+  padding: 10px 20px;
+  background-color: #1a5276;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.3s;
+}
+
+.back-button {
+  background-color: #6c757d;
+}
+
+.back-button:hover {
+  background-color: #5a6268;
+}
+
+.print-button:hover, .download-button:hover {
+  background-color: #154360;
+}
+
+.download-button {
+  background-color: #28a745;
+}
+
+.download-button:hover {
+  background-color: #218838;
+}
+
+/* Print Specific Styles */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  
+  .id-card-wrapper, .id-card-wrapper * {
+    visibility: visible;
+  }
+  
+  .id-card-actions {
+    display: none;
+  }
+  
+  .id-card {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    page-break-after: always;
+  }
+  
+  .id-card-front, .id-card-back {
+    box-shadow: none;
+    border: 1px solid #ddd;
+    margin: 0 auto;
+  }
+  
+  .id-card-front {
+    page-break-after: always;
+  }
+} 

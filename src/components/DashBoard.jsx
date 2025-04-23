@@ -3,6 +3,7 @@
 import React, { useState } from "react"
 import "../styles/Dashboard.css"
 import StudentFeeDetails from "./Fees"
+import IDCardGenerator from "./IDCardGenerator"
 import StudentRegistrationForm from "./SchoolRegistrationForm/StudentRegistrationform"
 import Sidebar from "./Sidebar"
 
@@ -15,10 +16,8 @@ const Dashboard = () => {
         return <StudentFeeDetails />
       case "Registration Form":
         return <StudentRegistrationForm />
-      case "Project Form":
-        return <ProjectForm />
-      case "Cumulative1":
-        return <Cumulative1 />
+      case "ID Card Generator":
+        return <IDCardGenerator />
       default:
         return <StudentFeeDetails />
     }

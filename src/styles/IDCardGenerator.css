@@ -1,0 +1,361 @@
+@import url("https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;500;700&display=swap");
+
+:root {
+  --idcard-primary-color: #4a6fdc;
+  --idcard-primary-light: #e8eeff;
+  --idcard-secondary-color: #f8f9fa;
+  --idcard-border-color: #e6e6e6;
+  --idcard-text-color: #333;
+  --idcard-error-color: #d32f2f;
+  --idcard-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  --idcard-input-height: 46px; /* Standard height for inputs */
+}
+
+.idcard-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.idcard-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  height: 60px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.idcard-logo {
+  font-size: 28px;
+  font-weight: bold;
+  color: var(--idcard-primary-color);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.idcard-form-container {
+  background: white;
+  border-radius: 10px;
+  box-shadow: var(--idcard-shadow);
+  padding: 20px;
+  margin-bottom: 20px;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.idcard-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.idcard-form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 5px;
+}
+
+.idcard-form-row {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 5px;
+}
+
+.idcard-form-row .idcard-form-group {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+.idcard-form-group label {
+  margin-bottom: 4px;
+  font-weight: 500;
+  color: var(--idcard-text-color);
+}
+
+.idcard-required {
+  color: var(--idcard-error-color);
+}
+
+.idcard-form-group input,
+.idcard-form-group select,
+.idcard-form-group textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--idcard-border-color);
+  border-radius: 8px;
+  font-size: 16px;
+  background-color: white;
+  transition: all 0.3s ease;
+  color: var(--idcard-text-color);
+  height: var(--idcard-input-height);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.idcard-form-group textarea {
+  min-height: var(--idcard-input-height);
+  height: var(--idcard-input-height);
+  resize: vertical;
+  overflow-y: auto;
+  line-height: 1.5;
+  padding-top: 10px;
+}
+
+.idcard-form-group textarea.has-content {
+  height: auto;
+  min-height: var(--idcard-input-height);
+}
+
+.idcard-form-group input.idcard-error,
+.idcard-form-group select.idcard-error,
+.idcard-form-group textarea.idcard-error,
+.idcard-photo-preview.idcard-error {
+  border-color: var(--idcard-error-color);
+}
+
+/* Photo upload section */
+.idcard-photo-upload {
+  margin-bottom: 15px;
+}
+
+.idcard-photo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.idcard-photo-preview {
+  width: 150px;
+  height: 150px;
+  border: 2px dashed var(--idcard-border-color);
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  overflow: hidden;
+  background-color: var(--idcard-secondary-color);
+  transition: all 0.3s ease;
+}
+
+.idcard-photo-preview:hover {
+  border-color: var(--idcard-primary-color);
+}
+
+.idcard-photo-preview.has-photo {
+  border: 2px solid var(--idcard-primary-color);
+  border-style: solid;
+  cursor: default;
+}
+
+.idcard-photo-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: #888;
+  padding: 0 15px;
+  text-align: center;
+}
+
+.idcard-photo-icon {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.idcard-preview-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.idcard-upload-btn {
+  background-color: var(--idcard-primary-light);
+  color: var(--idcard-primary-color);
+  border: 1px solid var(--idcard-primary-color);
+  border-radius: 8px;
+  padding: 8px 15px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-weight: 500;
+}
+
+.idcard-upload-btn:hover {
+  background-color: #dbe5ff;
+}
+
+.idcard-remove-btn {
+  background-color: #ffebee;
+  color: #d32f2f;
+  border: 1px solid #d32f2f;
+  border-radius: 8px;
+  padding: 8px 15px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-weight: 500;
+}
+
+.idcard-remove-btn:hover {
+  background-color: #ffcdd2;
+}
+
+/* Hide spinners for number inputs */
+.idcard-form-group input[type="number"]::-webkit-inner-spin-button,
+.idcard-form-group input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.idcard-form-group input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* Chrome autofill styles */
+.idcard-form-group input:-webkit-autofill,
+.idcard-form-group input:-webkit-autofill:hover,
+.idcard-form-group input:-webkit-autofill:focus,
+.idcard-form-group textarea:-webkit-autofill,
+.idcard-form-group textarea:-webkit-autofill:hover,
+.idcard-form-group textarea:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--idcard-text-color);
+  -webkit-box-shadow: 0 0 0px 1000px white inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* Firefox autofill styles */
+.idcard-form-group input:autofill,
+.idcard-form-group textarea:autofill {
+  background-color: white !important;
+  color: var(--idcard-text-color) !important;
+}
+
+.idcard-form-group input::selection,
+.idcard-form-group textarea::selection {
+  background-color: var(--idcard-primary-light);
+  color: var(--idcard-text-color);
+}
+
+.idcard-form-group input::-moz-selection,
+.idcard-form-group textarea::-moz-selection {
+  background-color: var(--idcard-primary-light);
+  color: var(--idcard-text-color);
+}
+
+.idcard-form-group input::placeholder,
+.idcard-form-group textarea::placeholder {
+  color: #999;
+}
+
+.idcard-form-group input:focus,
+.idcard-form-group select:focus,
+.idcard-form-group textarea:focus {
+  outline: none;
+  border-color: var(--idcard-primary-color);
+  box-shadow: 0 0 0 2px rgba(74, 111, 220, 0.2);
+}
+
+.idcard-error-message {
+  color: var(--idcard-error-color);
+  font-size: 13px;
+  margin-top: 2px;
+}
+
+.idcard-generate-btn {
+  background-color: var(--idcard-primary-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 40px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 8px;
+}
+
+.idcard-generate-btn:hover {
+  background-color: #3a5fc6;
+}
+
+/* Tablet & below */
+@media (max-width: 768px) {
+  .idcard-container {
+    padding: 15px;
+  }
+
+  .idcard-header {
+    flex-direction: column;
+    height: auto;
+    gap: 10px;
+  }
+
+  .idcard-logo {
+    font-size: 24px;
+    white-space: normal;
+    text-align: center;
+  }
+
+  .idcard-form-container {
+    padding: 15px;
+  }
+
+  .idcard-form {
+    padding: 0.5rem 0;
+  }
+
+  .idcard-form-group {
+    margin-bottom: 3px;
+  }
+
+  .idcard-form-row {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .idcard-form-group input,
+  .idcard-form-group select,
+  .idcard-form-group textarea {
+    padding: 8px;
+    font-size: 15px;
+  }
+
+  .idcard-generate-btn {
+    width: 100%;
+    padding: 10px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .idcard-logo {
+    font-size: 20px;
+  }
+
+  .idcard-form-container {
+    padding: 12px;
+  }
+
+  .idcard-form-group label {
+    font-size: 14px;
+  }
+
+  .idcard-form-group input,
+  .idcard-form-group select,
+  .idcard-form-group textarea {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .idcard-generate-btn {
+    font-size: 15px;
+    padding: 8px;
+  }
+} 
