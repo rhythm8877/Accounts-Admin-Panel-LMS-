@@ -1,0 +1,192 @@
+.attendance-form-container {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.no-data-message {
+  padding: 30px;
+  text-align: center;
+  font-size: 16px;
+  color: #666;
+  background-color: #f9f9f9;
+  border-radius: 6px;
+  margin: 20px 0;
+}
+
+.attendance-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  padding: 15px;
+  background-color: #f7f9fc;
+  border-radius: 6px;
+  margin-bottom: 20px;
+}
+
+.summary-item {
+  display: flex;
+  flex-direction: column;
+  min-width: 100px;
+}
+
+.summary-item .label {
+  font-size: 12px;
+  color: #666;
+}
+
+.summary-item .value {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+}
+
+.summary-item .present {
+  color: #2ecc71;
+}
+
+.summary-item .absent {
+  color: #e74c3c;
+}
+
+.bulk-actions {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.bulk-actions button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.bulk-actions .btn-present {
+  background-color: rgba(46, 204, 113, 0.2);
+  color: #2ecc71;
+}
+
+.bulk-actions .btn-present:hover {
+  background-color: rgba(46, 204, 113, 0.3);
+}
+
+.bulk-actions .btn-absent {
+  background-color: rgba(231, 76, 60, 0.2);
+  color: #e74c3c;
+}
+
+.bulk-actions .btn-absent:hover {
+  background-color: rgba(231, 76, 60, 0.3);
+}
+
+.bulk-actions button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.attendance-table {
+  border: 1px solid #eee;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.attendance-header {
+  display: flex;
+  background-color: #f1f5f9;
+  padding: 12px 15px;
+  font-weight: bold;
+  border-bottom: 1px solid #ddd;
+}
+
+.attendance-row {
+  display: flex;
+  padding: 12px 15px;
+  border-bottom: 1px solid #eee;
+  transition: background-color 0.2s;
+}
+
+.attendance-row:hover {
+  background-color: #f9f9f9;
+}
+
+.attendance-row:last-child {
+  border-bottom: none;
+}
+
+.roll-col {
+  flex: 0 0 100px;
+}
+
+.name-col {
+  flex: 1;
+}
+
+.status-col {
+  flex: 0 0 220px;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.status-option {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.status-option.active.present, 
+.status-option.active:has(input[value="present"]:checked) {
+  background-color: rgba(46, 204, 113, 0.2);
+  color: #2ecc71;
+}
+
+.status-option.active.absent,
+.status-option.active:has(input[value="absent"]:checked) {
+  background-color: rgba(231, 76, 60, 0.2);
+  color: #e74c3c;
+}
+
+.status-option input {
+  margin: 0;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.save-button {
+  padding: 10px 20px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.save-button:hover {
+  background-color: #2980b9;
+}
+
+.save-button:disabled {
+  background-color: #95a5a6;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .status-col {
+    flex-direction: column;
+  }
+} 

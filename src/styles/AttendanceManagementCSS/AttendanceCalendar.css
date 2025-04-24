@@ -1,0 +1,261 @@
+.attendance-calendar {
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eaeaea;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.calendar-header h2 {
+  margin: 0;
+  color: #1a5276;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.calendar-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.calendar-selector {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.calendar-selector label {
+  font-weight: 500;
+  color: #495057;
+}
+
+.calendar-selector select {
+  padding: 8px 12px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  background-color: white;
+  min-width: 200px;
+}
+
+.month-selector {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.month-selector select {
+  padding: 8px 12px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  background-color: white;
+}
+
+.nav-btn {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.nav-btn:hover {
+  background-color: #f8f9fa;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.calendar-day-header {
+  text-align: center;
+  font-weight: 600;
+  color: #495057;
+  padding: 10px;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+}
+
+.calendar-day {
+  height: 120px;
+  border: 1px solid #eaeaea;
+  border-radius: 4px;
+  padding: 8px;
+  overflow: hidden;
+  position: relative;
+}
+
+.calendar-day.empty {
+  background-color: #f8f9fa;
+  border: 1px dashed #eaeaea;
+}
+
+.calendar-day.weekend {
+  background-color: #f8f9fa;
+}
+
+.calendar-day.holiday {
+  background-color: #e8f5e9;
+}
+
+.day-number {
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.holiday-name {
+  color: #2e7d32;
+  font-size: 12px;
+  font-style: italic;
+  margin-top: 5px;
+}
+
+.weekend-label {
+  color: #6c757d;
+  font-size: 12px;
+  font-style: italic;
+  margin-top: 5px;
+}
+
+.attendance-info {
+  margin-top: 10px;
+  font-size: 12px;
+}
+
+.attendance-status {
+  padding: 5px;
+  border-radius: 4px;
+  margin-top: 5px;
+}
+
+.attendance-status.high {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.attendance-status.medium {
+  background-color: #fff8e1;
+  color: #f57f17;
+}
+
+.attendance-status.low {
+  background-color: #ffebee;
+  color: #c62828;
+}
+
+.no-data {
+  color: #6c757d;
+  font-size: 12px;
+  font-style: italic;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.calendar-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  margin-top: 20px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.legend-color {
+  width: 16px;
+  height: 16px;
+  border-radius: 3px;
+}
+
+.legend-color.weekend {
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+}
+
+.legend-color.holiday {
+  background-color: #e8f5e9;
+}
+
+.legend-color.high {
+  background-color: #e8f5e9;
+}
+
+.legend-color.medium {
+  background-color: #fff8e1;
+}
+
+.legend-color.low {
+  background-color: #ffebee;
+}
+
+@media (max-width: 768px) {
+  .calendar-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .calendar-controls {
+    width: 100%;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .calendar-day {
+    height: 100px;
+    font-size: 13px;
+  }
+  
+  .calendar-grid {
+    gap: 5px;
+  }
+}
+
+@media (max-width: 576px) {
+  .calendar-grid {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .calendar-day-header {
+    display: none;
+  }
+  
+  .calendar-day {
+    height: auto;
+    min-height: 60px;
+  }
+  
+  .calendar-day.empty {
+    display: none;
+  }
+  
+  .day-number::before {
+    content: attr(data-day);
+    margin-right: 5px;
+  }
+} 

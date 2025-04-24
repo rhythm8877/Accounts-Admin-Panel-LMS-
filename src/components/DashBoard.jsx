@@ -2,6 +2,7 @@
 
 import React, { useState } from "react"
 import "../styles/Dashboard.css"
+import AttendanceManagement from "./AttendanceManagementSystem/AttendanceManagement"
 import StudentFeeDetails from "./Fees"
 import IDCardGenerator from "./IDCardGenerator"
 import StudentRegistrationForm from "./SchoolRegistrationForm/StudentRegistrationform"
@@ -18,6 +19,8 @@ const Dashboard = () => {
         return <StudentRegistrationForm />
       case "ID Card Generator":
         return <IDCardGenerator />
+      case "Attendance":
+        return <AttendanceManagement />
       default:
         return <StudentFeeDetails />
     }

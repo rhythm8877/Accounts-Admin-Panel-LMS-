@@ -1,0 +1,275 @@
+.attendance-stats {
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.stats-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eaeaea;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.stats-header h2 {
+  margin: 0;
+  color: #1a5276;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.overall-stat {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #f8f9fa;
+  padding: 8px 15px;
+  border-radius: 4px;
+  border-left: 4px solid #1a5276;
+}
+
+.stat-label {
+  font-weight: 500;
+  color: #495057;
+}
+
+.stat-value {
+  font-weight: 600;
+  color: #1a5276;
+  font-size: 18px;
+}
+
+.stats-content {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.stats-row {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* Pie Chart Styles */
+.attendance-pie-chart {
+  flex: 1;
+  min-width: 300px;
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.attendance-pie-chart h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #1a5276;
+  font-size: 18px;
+  text-align: center;
+}
+
+.pie-chart-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.pie-chart {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  position: relative;
+}
+
+.pie-chart-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.legend-color {
+  width: 16px;
+  height: 16px;
+  border-radius: 3px;
+}
+
+.legend-color.high {
+  background-color: #4CAF50;
+}
+
+.legend-color.medium {
+  background-color: #FFC107;
+}
+
+.legend-color.low {
+  background-color: #F44336;
+}
+
+/* Bar Graph Styles */
+.attendance-bar-graph {
+  flex: 1;
+  min-width: 300px;
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.attendance-bar-graph h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #1a5276;
+  font-size: 18px;
+  text-align: center;
+}
+
+.graph-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  height: 240px;
+  margin-top: 20px;
+}
+
+.graph-bar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 60px;
+}
+
+.graph-bar-wrapper {
+  height: 200px;
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 10px;
+}
+
+.graph-bar {
+  width: 40px;
+  background-color: #1a5276;
+  border-radius: 4px 4px 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 5px;
+  position: relative;
+  transition: height 0.5s ease;
+}
+
+.graph-value {
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.graph-label {
+  font-size: 12px;
+  color: #495057;
+}
+
+/* Alerts Styles */
+.attendance-alerts {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.attendance-alerts h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #1a5276;
+  font-size: 18px;
+}
+
+.alerts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.alert-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 15px;
+  padding: 12px 15px;
+  border-radius: 4px;
+  position: relative;
+}
+
+.alert-item.warning {
+  background-color: #fff8e1;
+  border-left: 4px solid #FFC107;
+}
+
+.alert-item.critical {
+  background-color: #ffebee;
+  border-left: 4px solid #F44336;
+}
+
+.alert-name {
+  font-weight: 600;
+  flex: 1;
+  min-width: 150px;
+}
+
+.alert-roll {
+  font-size: 14px;
+  color: #6c757d;
+  min-width: 100px;
+}
+
+.alert-percentage {
+  font-weight: 600;
+  min-width: 60px;
+  text-align: center;
+}
+
+.alert-message {
+  color: #d32f2f;
+  font-size: 13px;
+  width: 100%;
+  margin-top: 5px;
+  font-style: italic;
+}
+
+.no-alerts {
+  text-align: center;
+  padding: 20px;
+  color: #6c757d;
+  font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .stats-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .stats-row {
+    flex-direction: column;
+  }
+  
+  .graph-container {
+    overflow-x: auto;
+    justify-content: flex-start;
+    padding-bottom: 10px;
+  }
+  
+  .graph-bar-container {
+    min-width: 60px;
+  }
+} 
