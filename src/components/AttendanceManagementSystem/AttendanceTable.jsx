@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../../styles/AttendanceManagementCSS/AttendanceTable.css";
 
-const AttendanceTable = ({ attendanceData, students, selectedDate, disabled }) => {
+const AttendanceTable = ({ attendanceData, students, selectedDate, disabled, selectedGrade, selectedSection }) => {
   const [filter, setFilter] = useState("all"); // all, present, absent
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -36,6 +36,56 @@ const AttendanceTable = ({ attendanceData, students, selectedDate, disabled }) =
 
     return matchesFilter && matchesSearch;
   });
+
+  // Function to export data to Excel
+  const exportToExcel = () => {
+    // Prepare data for export
+    const headers = ["Roll No", "Name", "Status"];
+    
+    // Create array of student data rows
+    const rows = filteredData.map(record => {
+      const studentDetails = students.find(s => s.id === record.id) || {};
+      return [
+        studentDetails.rollNumber || "",
+        studentDetails.name || "",
+        record.status === "present" ? "Present" : "Absent"
+      ];
+    });
+    
+    // Create CSV content
+    let csvContent = headers.join(",") + "\r\n";
+    rows.forEach(row => {
+      // Add quotes around fields with commas
+      const quotedRow = row.map(field => {
+        const fieldStr = String(field);
+        return fieldStr.includes(",") ? `"${fieldStr}"` : fieldStr;
+      });
+      csvContent += quotedRow.join(",") + "\r\n";
+    });
+    
+    // Format date for file name (YYYY-MM-DD)
+    const formattedDate = new Date(selectedDate).toISOString().split('T')[0];
+    
+    // Create file name: Grade-Section-Date
+    const fileName = `${selectedGrade}-${selectedSection}-${formattedDate}.xlsx`;
+    
+    // Create a Blob with the CSV content
+    const blob = new Blob([csvContent], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
+    
+    // Create a URL for the Blob
+    const url = URL.createObjectURL(blob);
+    
+    // Create a link element and trigger download
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = fileName;
+    document.body.appendChild(link);
+    link.click();
+    
+    // Clean up
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
 
   return (
     <div className="attendance-table-container">
@@ -137,8 +187,14 @@ const AttendanceTable = ({ attendanceData, students, selectedDate, disabled }) =
       </div>
       
       <div className="export-container">
-        <button className="export-btn">Export to CSV</button>
-        <button className="export-btn">Print</button>
+        <button className="export-btn" onClick={exportToExcel}>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          Export Attendance
+        </button>
       </div>
     </div>
   );

@@ -251,16 +251,25 @@
   display: flex;
   justify-content: flex-end;
   gap: 10px;
+  margin-top: 20px;
 }
 
 .export-btn {
-  padding: 8px 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 15px;
   background-color: #3498db;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.2s;
+  font-weight: 500;
+}
+
+.export-btn svg {
+  opacity: 0.9;
 }
 
 .export-btn:hover {

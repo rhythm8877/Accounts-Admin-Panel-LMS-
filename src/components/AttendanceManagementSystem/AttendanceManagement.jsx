@@ -242,6 +242,58 @@ const AttendanceManagement = () => {
     );
   };
 
+  // Tab content
+  const renderTabContent = () => {
+    if (activeTab === "mark") {
+      return (
+        <AttendanceForm
+          students={students}
+          attendanceData={attendanceData}
+          onChange={handleAttendanceChange}
+          onSave={handleSaveAttendance}
+          disabled={isLoading}
+        />
+      );
+    } else {
+      // For view tab, show empty state if no saved attendance
+      const savedKey = `${selectedGrade}-${isHigherGrade ? selectedStream : selectedSection}-${selectedDate}`;
+      const hasSavedData = savedAttendance[savedKey] && savedAttendance[savedKey].length > 0;
+      
+      if (!hasSavedData) {
+        return (
+          <div className="attendance-empty-state">
+            <div className="empty-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+              </svg>
+            </div>
+            <h3>No Attendance Records</h3>
+            <p>No attendance has been saved for this class and date yet.</p>
+            <button 
+              className="tab-btn" 
+              onClick={() => setActiveTab("mark")}
+            >
+              Mark Attendance
+            </button>
+          </div>
+        );
+      }
+      
+      return (
+        <AttendanceTable
+          students={students}
+          attendanceData={savedAttendance[savedKey] || []}
+          selectedDate={selectedDate}
+          disabled={false}
+          selectedGrade={selectedGrade}
+          selectedSection={isHigherGrade ? selectedStream : selectedSection}
+        />
+      );
+    }
+  };
+
   return (
     <div className="attendance-management-container">
       <div className="fee-header">
@@ -304,22 +356,7 @@ const AttendanceManagement = () => {
           </div>
 
           <div className="tab-content">
-            {activeTab === "mark" ? (
-              <AttendanceForm
-                students={students}
-                attendanceData={attendanceData}
-                onChange={handleAttendanceChange}
-                onSave={handleSaveAttendance}
-                disabled={isLoading}
-              />
-            ) : (
-              <AttendanceTable
-                students={students}
-                attendanceData={attendanceData}
-                selectedDate={selectedDate}
-                disabled={students.length === 0}
-              />
-            )}
+            {renderTabContent()}
           </div>
         </div>
       )}

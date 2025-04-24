@@ -223,6 +223,49 @@
   border-radius: 8px;
 }
 
+/* Empty state styling */
+.attendance-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+}
+
+.empty-icon {
+  color: #95a5a6;
+  margin-bottom: 20px;
+}
+
+.attendance-empty-state h3 {
+  font-size: 20px;
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+.attendance-empty-state p {
+  color: #7f8c8d;
+  margin-bottom: 25px;
+  max-width: 400px;
+}
+
+.attendance-empty-state .tab-btn {
+  background-color: #3498db;
+  color: white;
+  border-radius: 4px;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.attendance-empty-state .tab-btn:hover {
+  background-color: #2980b9;
+}
+
 @media (max-width: 768px) {
   .selection-row {
     flex-direction: column;
