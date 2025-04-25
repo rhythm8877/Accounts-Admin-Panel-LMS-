@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../../styles/AttendanceManagementCSS/AttendanceManagement.css";
 import AttendanceForm from "./AttendanceForm";
+import AttendanceSummary from "./AttendanceSummary";
 import AttendanceTable from "./AttendanceTable";
 
 const AttendanceManagement = () => {
@@ -13,9 +14,16 @@ const AttendanceManagement = () => {
   const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split("T")[0]);
   const [attendanceData, setAttendanceData] = useState([]);
   const [savedAttendance, setSavedAttendance] = useState({});
-  const [activeTab, setActiveTab] = useState("mark"); // 'mark' or 'view'
+  const [activeTab, setActiveTab] = useState("mark"); // 'mark', 'view', or 'summary'
   const [isLoading, setIsLoading] = useState(false);
   const [students, setStudents] = useState([]);
+  const [holidays, setHolidays] = useState({});
+  
+  // Calculate if selected date is a Sunday or a holiday
+  const selectedDateObj = new Date(selectedDate);
+  const isSunday = selectedDateObj.getDay() === 0;
+  const isHoliday = holidays[selectedDate] || false;
+  const isAttendanceDisabled = isSunday || isHoliday;
 
   // Available grades and sections/streams
   const grades = [
@@ -111,17 +119,17 @@ const AttendanceManagement = () => {
         // If we have saved data for this date and selection, use it
         setAttendanceData(savedAttendance[savedKey]);
       } else {
-        // Otherwise, initialize with all students marked PRESENT by default
+        // Otherwise, initialize with all students marked as null if it's a holiday, otherwise PRESENT by default
         const initialData = students.map(student => ({
           id: student.id,
-          status: "present" // Mark as present by default
+          status: isAttendanceDisabled ? "holiday" : "present" // Mark as holiday if Sunday/holiday, otherwise present
         }));
         setAttendanceData(initialData);
       }
     } else {
       setAttendanceData([]);
     }
-  }, [students, selectedDate, savedAttendance, selectedGrade, selectedSection, selectedStream, isHigherGrade]);
+  }, [students, selectedDate, savedAttendance, selectedGrade, selectedSection, selectedStream, isHigherGrade, isAttendanceDisabled]);
 
   // Handle date change
   const handleDateChange = (e) => {
@@ -152,6 +160,14 @@ const AttendanceManagement = () => {
     setAttendanceData(updatedAttendance);
   };
 
+  // Toggle holiday status for the selected date
+  const toggleHoliday = () => {
+    setHolidays(prev => ({
+      ...prev,
+      [selectedDate]: !prev[selectedDate]
+    }));
+  };
+
   // Save attendance data
   const handleSaveAttendance = () => {
     setIsLoading(true);
@@ -169,6 +185,48 @@ const AttendanceManagement = () => {
       setActiveTab("view");
       alert("Attendance saved successfully!");
     }, 800);
+  };
+
+  // Generate attendance summary data
+  const generateAttendanceSummary = () => {
+    const classKeys = Object.keys(savedAttendance).filter(key => 
+      key.startsWith(`${selectedGrade}-${isHigherGrade ? selectedStream : selectedSection}`)
+    );
+    
+    const totalClasses = classKeys.length;
+    
+    if (totalClasses === 0) {
+      return [];
+    }
+    
+    const summaryData = students.map(student => {
+      // Count classes where student was present
+      let presentCount = 0;
+      
+      classKeys.forEach(key => {
+        const classData = savedAttendance[key];
+        const studentRecord = classData.find(record => record.id === student.id);
+        
+        if (studentRecord && studentRecord.status === "present") {
+          presentCount++;
+        }
+      });
+      
+      // Calculate attendance percentage
+      const attendancePercentage = (presentCount / totalClasses) * 100;
+      
+      return {
+        id: student.id,
+        rollNumber: student.rollNumber,
+        name: student.name,
+        totalClasses,
+        presentCount,
+        absentCount: totalClasses - presentCount,
+        attendancePercentage: attendancePercentage.toFixed(2)
+      };
+    });
+    
+    return summaryData;
   };
 
   // Render the selection form
@@ -245,16 +303,70 @@ const AttendanceManagement = () => {
   // Tab content
   const renderTabContent = () => {
     if (activeTab === "mark") {
+      // If it's a Sunday or holiday, show message
+      if (isAttendanceDisabled) {
+        return (
+          <div className="attendance-holiday-state">
+            <div className="holiday-icon">
+              {isSunday ? (
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="5" />
+                  <path d="M12 1v2" />
+                  <path d="M12 21v2" />
+                  <path d="M4.22 4.22l1.42 1.42" />
+                  <path d="M18.36 18.36l1.42 1.42" />
+                  <path d="M1 12h2" />
+                  <path d="M21 12h2" />
+                  <path d="M4.22 19.78l1.42-1.42" />
+                  <path d="M18.36 5.64l1.42-1.42" />
+                </svg>
+              ) : (
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                  <line x1="16" y1="2" x2="16" y2="6" />
+                  <line x1="8" y1="2" x2="8" y2="6" />
+                  <line x1="3" y1="10" x2="21" y2="10" />
+                </svg>
+              )}
+            </div>
+            <h3>{isSunday ? "Sunday – Holiday!" : "Holiday!"}</h3>
+            <p>Attendance marking is not available for this date.</p>
+            {!isSunday && (
+              <div className="holiday-actions">
+                <button 
+                  className="proceed-btn" 
+                  onClick={toggleHoliday}
+                >
+                  Remove Holiday
+                </button>
+              </div>
+            )}
+          </div>
+        );
+      }
+      
       return (
-        <AttendanceForm
-          students={students}
-          attendanceData={attendanceData}
-          onChange={handleAttendanceChange}
-          onSave={handleSaveAttendance}
-          disabled={isLoading}
-        />
+        <>
+          {!isSunday && (
+            <div className="holiday-toggle">
+              <button 
+                className="proceed-btn" 
+                onClick={toggleHoliday}
+              >
+                {isHoliday ? 'Remove Holiday' : 'Mark as Holiday'}
+              </button>
+            </div>
+          )}
+          <AttendanceForm
+            students={students}
+            attendanceData={attendanceData}
+            onChange={handleAttendanceChange}
+            onSave={handleSaveAttendance}
+            disabled={isLoading || isAttendanceDisabled}
+          />
+        </>
       );
-    } else {
+    } else if (activeTab === "view") {
       // For view tab, show empty state if no saved attendance
       const savedKey = `${selectedGrade}-${isHigherGrade ? selectedStream : selectedSection}-${selectedDate}`;
       const hasSavedData = savedAttendance[savedKey] && savedAttendance[savedKey].length > 0;
@@ -270,7 +382,49 @@ const AttendanceManagement = () => {
               </svg>
             </div>
             <h3>No Attendance Records</h3>
-            <p>No attendance has been saved for this class and date yet.</p>
+            {isAttendanceDisabled ? (
+              <p>{isSunday ? "This date is a Sunday. No attendance is taken on Sundays." : "This date is marked as a holiday. No attendance is taken on holidays."}</p>
+            ) : (
+              <p>No attendance has been saved for this class and date yet.</p>
+            )}
+            {!isAttendanceDisabled && (
+              <button 
+                className="tab-btn" 
+                onClick={() => setActiveTab("mark")}
+              >
+                Mark Attendance
+              </button>
+            )}
+          </div>
+        );
+      }
+      
+      return (
+        <AttendanceTable
+          students={students}
+          attendanceData={savedAttendance[savedKey] || []}
+          selectedDate={selectedDate}
+          disabled={false}
+          selectedGrade={selectedGrade}
+          selectedSection={isHigherGrade ? selectedStream : selectedSection}
+        />
+      );
+    } else if (activeTab === "summary") {
+      const summaryData = generateAttendanceSummary();
+      
+      // Show empty state if no saved attendance records
+      if (summaryData.length === 0) {
+        return (
+          <div className="attendance-empty-state">
+            <div className="empty-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+              </svg>
+            </div>
+            <h3>No Attendance Summary</h3>
+            <p>No attendance records have been saved for this class yet.</p>
             <button 
               className="tab-btn" 
               onClick={() => setActiveTab("mark")}
@@ -282,11 +436,8 @@ const AttendanceManagement = () => {
       }
       
       return (
-        <AttendanceTable
-          students={students}
-          attendanceData={savedAttendance[savedKey] || []}
-          selectedDate={selectedDate}
-          disabled={false}
+        <AttendanceSummary
+          summaryData={summaryData}
           selectedGrade={selectedGrade}
           selectedSection={isHigherGrade ? selectedStream : selectedSection}
         />
@@ -330,16 +481,18 @@ const AttendanceManagement = () => {
           </div>
 
           <div className="tabs">
-            <button
-              className={`tab-btn ${activeTab === "mark" ? "active" : ""}`}
-              onClick={() => setActiveTab("mark")}
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-              </svg>
-              Mark Attendance
-            </button>
+            {!isAttendanceDisabled && (
+              <button
+                className={`tab-btn ${activeTab === "mark" ? "active" : ""}`}
+                onClick={() => setActiveTab("mark")}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                  <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                </svg>
+                Mark Attendance
+              </button>
+            )}
             <button
               className={`tab-btn ${activeTab === "view" ? "active" : ""}`}
               onClick={() => setActiveTab("view")}
@@ -352,6 +505,16 @@ const AttendanceManagement = () => {
                 <polyline points="10 9 9 9 8 9"></polyline>
               </svg>
               View Attendance
+            </button>
+            <button
+              className={`tab-btn ${activeTab === "summary" ? "active" : ""}`}
+              onClick={() => setActiveTab("summary")}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path>
+                <path d="M22 12A10 10 0 0 0 12 2v10z"></path>
+              </svg>
+              Attendance Summary
             </button>
           </div>
 

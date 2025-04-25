@@ -1,0 +1,255 @@
+.attendance-summary-container {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Summary Stats Cards */
+.summary-stats {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.stat-card {
+  flex: 1;
+  background-color: white;
+  border-radius: 8px;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+}
+
+.stat-card.poor {
+  border-left: 4px solid #ff5252;
+}
+
+.stat-card.warning {
+  border-left: 4px solid #ff9800;
+}
+
+.stat-card.good {
+  border-left: 4px solid #4caf50;
+}
+
+.stat-card.excellent {
+  border-left: 4px solid #8bc34a;
+}
+
+.stat-card.perfect {
+  border-left: 4px solid #2196f3;
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* Controls Section */
+.summary-controls {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.search-container {
+  flex: 1;
+  min-width: 250px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.filter-container {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.filter-option {
+  display: flex;
+  align-items: center;
+  padding: 8px 15px;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  user-select: none;
+  transition: all 0.2s;
+}
+
+.filter-option:hover {
+  background-color: #f0f0f0;
+}
+
+.filter-option.active {
+  background-color: #e3f2fd;
+  border-color: #90caf9;
+  font-weight: 500;
+}
+
+.filter-option input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Table Styles */
+.summary-table {
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.table-header {
+  display: flex;
+  background-color: #f5f5f5;
+  font-weight: bold;
+  padding: 12px 15px;
+  border-bottom: 1px solid #eaeaea;
+}
+
+.table-row {
+  display: flex;
+  padding: 12px 15px;
+  border-bottom: 1px solid #eaeaea;
+  transition: background-color 0.2s;
+}
+
+.table-row:hover {
+  background-color: #f9f9f9;
+}
+
+.table-row:last-child {
+  border-bottom: none;
+}
+
+.roll-col {
+  flex: 0.5;
+}
+
+.name-col {
+  flex: 2;
+}
+
+.classes-col, .present-col, .absent-col {
+  flex: 0.7;
+  text-align: center;
+}
+
+.percentage-col {
+  flex: 1;
+  text-align: center;
+}
+
+.percentage-badge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.percentage-badge.poor {
+  background-color: #ffebee;
+  color: #f44336;
+}
+
+.percentage-badge.warning {
+  background-color: #fff3e0;
+  color: #ff9800;
+}
+
+.percentage-badge.good {
+  background-color: #e8f5e9;
+  color: #4caf50;
+}
+
+.percentage-badge.excellent {
+  background-color: #f1f8e9;
+  color: #8bc34a;
+}
+
+.percentage-badge.perfect {
+  background-color: #e3f2fd;
+  color: #2196f3;
+}
+
+.no-results {
+  padding: 30px;
+  text-align: center;
+  color: #666;
+  font-style: italic;
+}
+
+/* Export Button */
+.export-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.export-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.export-btn:hover {
+  background-color: #1976d2;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .summary-stats {
+    flex-direction: column;
+  }
+  
+  .summary-controls {
+    flex-direction: column;
+  }
+  
+  .table-header, .table-row {
+    font-size: 0.9rem;
+  }
+  
+  .roll-col {
+    flex: 0.7;
+  }
+  
+  .classes-col, .present-col, .absent-col {
+    flex: 0.6;
+  }
+} 

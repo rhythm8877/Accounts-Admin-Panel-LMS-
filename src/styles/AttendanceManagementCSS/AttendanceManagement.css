@@ -113,6 +113,19 @@
   background-color: #2980b9;
 }
 
+/* Holiday toggle styling */
+.holiday-toggle {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.holiday-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
 /* Attendance Content Styles */
 .attendance-content {
   background-color: #fff;
