@@ -5,6 +5,7 @@ import "../styles/Dashboard.css"
 import AttendanceManagement from "./AttendanceManagementSystem/AttendanceManagement"
 import StudentFeeDetails from "./Fees"
 import IDCardGenerator from "./IDCardGenerator"
+import ResultsManagement from "./Results/ResultsManagement"
 import StudentRegistrationForm from "./SchoolRegistrationForm/StudentRegistrationform"
 import Sidebar from "./Sidebar"
 
@@ -21,6 +22,8 @@ const Dashboard = () => {
         return <IDCardGenerator />
       case "Attendance":
         return <AttendanceManagement />
+      case "Results":
+        return <ResultsManagement />
       default:
         return <StudentFeeDetails />
     }

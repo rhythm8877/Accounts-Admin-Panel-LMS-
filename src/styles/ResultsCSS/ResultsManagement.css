@@ -1,0 +1,262 @@
+.results-management-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Header Styles */
+.results-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+  flex-direction: row;
+  white-space: nowrap;
+}
+
+.results-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: #4a6fdc;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* Selection Form Styles */
+.selection-form {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 0;
+  margin-bottom: 30px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.card-header {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-bottom: 1px solid #e1e4e8;
+}
+
+.card-header h3 {
+  margin: 0 0 5px 0;
+  color: #2c3e50;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.card-header p {
+  margin: 0;
+  color: #6c757d;
+  font-size: 14px;
+}
+
+.selection-content {
+  padding: 20px;
+}
+
+.selection-row {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.selection-field {
+  flex: 1;
+  min-width: 200px;
+  margin-bottom: 15px;
+}
+
+.selection-field label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #495057;
+}
+
+.selection-field select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  font-size: 14px;
+  background-color: white;
+  transition: border-color 0.2s;
+}
+
+.selection-field select:focus {
+  border-color: #3498db;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.25);
+}
+
+.selection-action {
+  margin-top: 15px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.proceed-btn {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.proceed-btn:hover {
+  background-color: #2980b9;
+}
+
+/* Results Content Styles */
+.results-content {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-top: 20px;
+}
+
+/* Summary Styles */
+.selection-summary {
+  display: flex;
+  align-items: center;
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  border-left: 4px solid #3498db;
+}
+
+.summary-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: rgba(52, 152, 219, 0.1);
+  border-radius: 8px;
+  margin-right: 15px;
+  color: #3498db;
+}
+
+.summary-text {
+  flex: 1;
+}
+
+.summary-label {
+  font-weight: 600;
+  color: #2c3e50;
+  margin-right: 8px;
+}
+
+.summary-value {
+  color: #3498db;
+  font-weight: 500;
+}
+
+.exam-type {
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+  border-left: 1px solid #e1e4e8;
+}
+
+/* Tab Styles */
+.tabs {
+  display: flex;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #e1e4e8;
+}
+
+.tab-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  font-size: 15px;
+  font-weight: 500;
+  color: #495057;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.tab-btn svg {
+  opacity: 0.7;
+}
+
+.tab-btn:hover {
+  color: #3498db;
+}
+
+.tab-btn.active {
+  color: #3498db;
+  border-bottom-color: #3498db;
+}
+
+.tab-btn.active svg {
+  opacity: 1;
+}
+
+.tab-content {
+  background-color: #fff;
+  border-radius: 8px;
+}
+
+/* Empty message styling */
+.empty-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+}
+
+.empty-message p {
+  color: #7f8c8d;
+  margin-bottom: 25px;
+  max-width: 400px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .selection-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .selection-field {
+    width: 100%;
+  }
+  
+  .selection-summary {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+  
+  .exam-type {
+    margin-left: 0;
+    padding: 0;
+    border-left: none;
+    border-top: 1px solid #e1e4e8;
+    padding-top: 15px;
+    width: 100%;
+  }
+
+  .tab-btn {
+    padding: 10px 15px;
+    font-size: 14px;
+  }
+} 
